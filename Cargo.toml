@@ -10,7 +10,8 @@ name = "openck"
 
 [worksoace]
 members = [
-    #"crates/*"
+    "crates/*"
 ]
 
 [dependencies]
+rand = {path="crates/rand",version="0.0.1"}

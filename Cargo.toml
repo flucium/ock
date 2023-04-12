@@ -8,10 +8,15 @@ edition = "2021"
 [[bin]]
 name = "openck"
 
-[worksoace]
-members = [
-    "crates/*"
-]
+#[worksoace]
+#members = [
+#    "crates/*"
+#]
 
 [dependencies]
-rand = {path="crates/rand",version="0.0.1"}
+
+#rust-random
+#https://github.com/rust-random
+#https://github.com/rust-random/rand
+rand = "0.8.5"
+rand_chacha = "0.3.1"

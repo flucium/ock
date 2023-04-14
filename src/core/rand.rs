@@ -4,10 +4,21 @@
 pub use rand::*;
 pub use rand_chacha::*;
 
-pub fn random() ->[u8;32]{
-    chacha20_rng()
-}
+// #[inline]
+// pub fn random() ->[u8;32]{
+//     chacha20_rng()
+// }
 
-pub fn chacha20_rng() -> [u8; 32] {
-    ChaCha20Rng::from_entropy().gen()
-}
+// #[inline]
+// pub fn chacha20_rng() -> [u8; 32] {
+//     ChaCha20Rng::from_entropy().gen()
+// }
+
+// #[inline]
+// pub fn random(size:usize){}
+
+// #[inline]
+// pub fn random_32bytes(){}
+
+// #[inline]
+// pub fn random_16bytes(){}

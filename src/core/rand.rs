@@ -1,3 +1,6 @@
+// https://github.com/rust-random
+// https://github.com/rust-random/rand
+
 pub use rand::*;
 pub use rand_chacha::*;
 

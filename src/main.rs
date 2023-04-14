@@ -1,3 +1,3 @@
-fn main() {
-    println!("Hello, world!");
-}
+use digest::generic_array::sequence::GenericSequence;
+
+fn main() {}

@@ -77,10 +77,11 @@ fn app() {
             }
         }
         _ => {
-            print!("None Subcommand")
+            print!("うぉ")
         }
     }
 }
+
 
 fn main() {
     app();

@@ -3,7 +3,7 @@
 // fn clap_subcommand_
 mod utils;
 
-use std::io::{self, read_to_string, stdout, Read, Write};
+use std::io::{self,  stdout, Read, Write};
 
 fn clap_command() -> clap::Command {
     const NAME: &str = "openck";

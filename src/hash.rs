@@ -80,6 +80,14 @@ impl Blake3 {
     pub fn new_keyed(key: &[u8; 32]) -> Self {
         Self(blake3::Hasher::new_keyed(key))
     }
+
+    pub fn new_derive_key() -> Self {
+        Self(blake3::Hasher::new_derive_key(BLAKE3_DEFAULT_CONTEXT))
+    }
+
+    pub fn new_derive_key_with_context(context: &str) -> Self {
+        Self(blake3::Hasher::new_derive_key(context))
+    }
 }
 
 impl Hasher for Blake3 {
@@ -151,4 +159,3 @@ impl Hasher for HmacSha512_256 {
         self.0.to_owned().finalize().into_bytes().to_vec()
     }
 }
-

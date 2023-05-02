@@ -51,6 +51,7 @@ pub trait Hasher {
     fn finalize(&mut self) -> Vec<u8>;
 }
 
+// SHA2
 pub struct Sha256(sha2::Sha256);
 
 impl Sha256 {
@@ -108,11 +109,16 @@ impl Hasher for Sha512_256 {
     }
 }
 
+// BLAKE3
 pub struct Blake3(blake3::Hasher);
 
 impl Blake3 {
     pub fn new() -> Self {
         Self(blake3::Hasher::new())
+    }
+
+    pub fn new_keyed(key: &[u8; 32]) -> Self {
+        Self(blake3::Hasher::new_keyed(key))
     }
 }
 
@@ -126,6 +132,8 @@ impl Hasher for Blake3 {
         self.0.finalize().as_bytes().to_vec()
     }
 }
+
+// HMAC SHA2
 
 pub struct HmacSha256(hmac::Hmac<sha2::Sha256>);
 

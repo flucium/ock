@@ -6,46 +6,6 @@ pub use hmac::Mac;
 
 const BLAKE3_DEFAULT_CONTEXT: &str = "";
 
-// pub enum Hasher{}
-
-// pub enum Mac{}
-
-// pub enum Kdf{}
-// pub enum Hasher {
-//     Blake3(blake3::Hasher),
-//     Sha256(sha2::Sha256),
-// }
-
-// impl Hasher {
-//     pub fn new() -> Self {
-//         Self::new_blake3()
-//     }
-//     pub fn new_blake3() -> Self {
-//         Self::Blake3(blake3::Hasher::new())
-//     }
-//     pub fn new_sha256() -> Self {
-//         Self::Sha256(Sha256::new())
-//     }
-//     pub fn update(&mut self, bytes: &[u8]) -> &mut Self {
-//         match self {
-//             Self::Blake3(f) => {
-//                 f.update(bytes);
-//                 self
-//             }
-//             Self::Sha256(f) => {
-//                 f.update(bytes);
-//                 self
-//             }
-//         }
-//     }
-//     pub fn finalize(&mut self) -> Vec<u8> {
-//         match self {
-//             Self::Blake3(f) => f.finalize().as_bytes().to_vec(),
-//             Self::Sha256(f) => f.finalize_reset().to_vec(),
-//         }
-//     }
-// }
-
 pub trait Hasher {
     fn update(&mut self, btyes: &[u8]) -> &mut Self;
     fn finalize(&mut self) -> Vec<u8>;
@@ -191,3 +151,4 @@ impl Hasher for HmacSha512_256 {
         self.0.to_owned().finalize().into_bytes().to_vec()
     }
 }
+

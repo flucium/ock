@@ -1,5 +1,9 @@
 use digest::Digest;
+use sha1::Sha1;
+use sha2::{Sha256, Sha512, Sha512_256};
+use sha3::{Sha3_256, Sha3_512};
 
+/// BLAKE3 KDF default context
 pub const BLAKE3_DEFAULT_CONTEXT: &str = "";
 
 // BLAKE3
@@ -30,34 +34,34 @@ pub fn blake3_mac(key: &[u8; 32], msg: &[u8]) -> [u8; 32] {
 /// SHA1
 #[deprecated]
 pub fn sha1(bytes: &[u8]) -> [u8; 20] {
-    sha1::Sha1::digest(bytes).into()
+    Sha1::digest(bytes).into()
 }
 
 // SHA2 Families
 
 /// SHA2 256
 pub fn sha256(bytes: &[u8]) -> [u8; 32] {
-    sha2::Sha256::digest(bytes).into()
+    Sha256::digest(bytes).into()
 }
 
 /// SHA2 512
 pub fn sha512(bytes: &[u8]) -> [u8; 64] {
-    sha2::Sha512::digest(bytes).into()
+    Sha512::digest(bytes).into()
 }
 
 /// SHA2 512/256
 pub fn sha512_256(bytes: &[u8]) -> [u8; 32] {
-    sha2::Sha512_256::digest(bytes).into()
+    Sha512_256::digest(bytes).into()
 }
 
 // SHA3 Families
 
 /// SHA3 256
 pub fn sha3_256(bytes: &[u8]) -> [u8; 32] {
-    sha3::Sha3_256::digest(bytes).into()
+    Sha3_256::digest(bytes).into()
 }
 
 /// SHA3 512
 pub fn sha3_512(bytes: &[u8]) -> [u8; 64] {
-    sha3::Sha3_512::digest(bytes).into()
+    Sha3_512::digest(bytes).into()
 }

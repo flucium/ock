@@ -25,6 +25,14 @@ pub fn blake3_mac(key: &[u8; 32], msg: &[u8]) -> [u8; 32] {
     blake3::keyed_hash(key, msg).into()
 }
 
+// SHA1
+
+/// SHA1
+#[deprecated]
+pub fn sha1(bytes: &[u8]) -> [u8; 20] {
+    sha1::Sha1::digest(bytes).into()
+}
+
 // SHA2 Families
 
 /// SHA2 256
@@ -43,3 +51,13 @@ pub fn sha512_256(bytes: &[u8]) -> [u8; 32] {
 }
 
 // SHA3 Families
+
+/// SHA3 256
+pub fn sha3_256(bytes: &[u8]) -> [u8; 32] {
+    sha3::Sha3_256::digest(bytes).into()
+}
+
+/// SHA3 512
+pub fn sha3_512(bytes: &[u8]) -> [u8; 64] {
+    sha3::Sha3_512::digest(bytes).into()
+}

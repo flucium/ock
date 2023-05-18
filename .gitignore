@@ -6,5 +6,7 @@
 # rs
 /rs/target/
 /rs/**/*.rs.bk
+/rs/.*
+/rs/**/.*
 
 # fs

@@ -1,9 +1,10 @@
 pub mod aes;
+pub mod array;
 pub mod hash;
-pub mod rand;
-pub mod utils;
-pub mod size;
 pub mod padding;
+pub mod rand;
+pub mod size;
+pub mod utils;
 
 pub type Result<T> = std::result::Result<T, Error>;
 

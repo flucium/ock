@@ -1,13 +1,14 @@
 
-.*
-**/.*
+.DS_Store
+/**/.DS_Store
 !.gitignore
 
 # rs
 /rs/target/
 /rs/Cargo.lock
 /rs/**/*.rs.bk
-/rs/.*
-/rs/**/.*
+/rs/.DS_Store
+/rs/**/.DS_Store
 
 # fs
+

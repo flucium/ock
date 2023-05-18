@@ -3,16 +3,6 @@ use digest::Digest;
 use sha1::Sha1;
 use sha2::{Sha256, Sha512, Sha512_256};
 use sha3::{Sha3_256, Sha3_512};
-// _LENGTH
-// pub const BLAKE3_LENGTH: usize = 32;
-// pub const BLAKE3_MAC_LENGTH: usize = 32;
-// pub const BLAKE3_KDF_LENGTH: usize = 32;
-// pub const SHA1_LENGTH: usize = 20;
-// pub const SHA256_LENGTH: usize = 32;
-// pub const SHA512_LENGTH: usize = 64;
-// pub const SHA512_256_LENGTH: usize = 32;
-// pub const SHA3_256_LENGTH: usize = 32;
-// pub const SHA3_512_LENGTH: usize = 64;
 
 /// BLAKE3 KDF default context
 pub const BLAKE3_DEFAULT_CONTEXT: &str = "";

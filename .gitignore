@@ -5,6 +5,7 @@
 
 # rs
 /rs/target/
+/rs/Cargo.lock
 /rs/**/*.rs.bk
 /rs/.*
 /rs/**/.*

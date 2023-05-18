@@ -41,7 +41,20 @@
 // BLAKE3
 // pub const BLAKE3_SIZE_U32: usize = 32;
 
+/// 12bytes
 pub const SIZE_U12: usize = 12;
+
+/// 16bytes
 pub const SIZE_U16: usize = 16;
+
+/// 20bytes
+pub const SIZE_U20: usize = 20;
+
+/// 24bytes
 pub const SIZE_U24: usize = 24;
+
+/// 32bytes
 pub const SIZE_U32: usize = 32;
+
+/// 64bytes
+pub const SIZE_U64: usize = 64;

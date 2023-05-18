@@ -65,5 +65,3 @@ pub fn aes_256_gcm_decrypt(key: &[u8; 32], nonce: &[u8; 12], cipher: &[u8]) -> R
         },
     }
 }
-
-fn demo() {}

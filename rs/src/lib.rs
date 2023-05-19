@@ -3,7 +3,6 @@ pub mod hash;
 pub mod rand;
 pub mod size;
 pub mod utils;
-pub mod ecdh;
 
 pub type Result<T> = std::result::Result<T, Error>;
 

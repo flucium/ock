@@ -1,19 +1,21 @@
-fn main() {
-    // let bs = Bytes { data: [9u8; 100] };
-    // print!("{:?}",bs);
+use std::io::Write;
 
-    Bytes{data:[0u8;100]};
-    Bytes{data:[0u8;200]};
+use aead::{Aead, KeyInit};
+
+const NAME: &str = "openck";
+
+const VERSION: &str = "0.0.1";
+
+const AUTHOR: &str = "flucium <flucium@flucium.net>";
+
+const ABOUT: &str = "";
+
+fn app() -> clap::Command {
+    clap::Command::new(NAME)
+        .version(VERSION)
+        .author(AUTHOR)
+        .about(ABOUT)
 }
 
-#[derive(Debug)]
-pub struct Bytes<const N: usize> {
-    data: [u8; N],
-}
 
-type BS = Bytes<100>;
-
-pub trait X {
-    fn demo<const N:usize>(&self)->Bytes<N>;
-}
-
+fn main() {}

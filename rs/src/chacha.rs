@@ -2,6 +2,15 @@ use crate::{size::*, Error, ErrorKind, Result};
 use aead::{Aead, KeyInit};
 use chacha20poly1305::{ChaCha20Poly1305, XChaCha20Poly1305};
 
+
+// type ChaCha8Poly1305 = chacha20poly1305::ChaChaPoly1305<chacha20::ChaCha8, aead::consts::U12>;
+
+// type ChaCha12Poly1305 = chacha20poly1305::ChaChaPoly1305<chacha20::ChaCha12, aead::consts::U12>;
+
+// type XChaCha8Poly1305 = chacha20poly1305::ChaChaPoly1305<chacha20::XChaCha8, aead::consts::U24>;
+
+// type XChaCha12Poly1305 = chacha20poly1305::ChaChaPoly1305<chacha20::XChaCha12, aead::consts::U24>;
+
 pub fn chacha20_poly1305_encrypt(
     key: &[u8; SIZE_U32],
     nonce: &[u8; SIZE_U12],

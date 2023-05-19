@@ -4,7 +4,6 @@ use crate::ErrorKind;
 use crate::Result;
 use aead::{Aead, KeyInit};
 use aes_gcm::{Aes128Gcm, Aes256Gcm};
-
 type Aes192Gcm = aes_gcm::AesGcm<aes_gcm::aes::Aes192, aead::consts::U12>;
 
 // pub fn aes_128_gcm_encrypt(key: &[u8; 16], nonce: &[u8; 12], plain: &[u8]) -> Result<Vec<u8>> {

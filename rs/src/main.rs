@@ -13,4 +13,13 @@ fn app() -> clap::Command {
         .about(ABOUT)
 }
 
-fn main() {}
+fn main() {
+    /*
+        --encrypt -e
+        --decrypt -d
+        --input -i
+        --output -o
+        --file -f
+    */
+    app();
+}

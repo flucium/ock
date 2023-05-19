@@ -1,7 +1,3 @@
-use std::io::Write;
-
-use aead::{Aead, KeyInit};
-
 const NAME: &str = "openck";
 
 const VERSION: &str = "0.0.1";

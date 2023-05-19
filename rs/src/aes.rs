@@ -6,6 +6,7 @@ use aead::{Aead, KeyInit};
 use aes_gcm::{Aes128Gcm, Aes256Gcm};
 type Aes192Gcm = aes_gcm::AesGcm<aes_gcm::aes::Aes192, aead::consts::U12>;
 
+#[deprecated]
 // pub fn aes_128_gcm_encrypt(key: &[u8; 16], nonce: &[u8; 12], plain: &[u8]) -> Result<Vec<u8>> {
 pub fn aes_128_gcm_encrypt(
     key: &[u8; SIZE_U16],
@@ -21,6 +22,7 @@ pub fn aes_128_gcm_encrypt(
     }
 }
 
+#[deprecated]
 // pub fn aes_128_gcm_decrypt(key: &[u8; 16], nonce: &[u8; 12], cipher: &[u8]) -> Result<Vec<u8>> {
 pub fn aes_128_gcm_decrypt(
     key: &[u8; SIZE_U16],
@@ -36,6 +38,7 @@ pub fn aes_128_gcm_decrypt(
     }
 }
 
+#[deprecated]
 // pub fn aes_192_gcm_encrypt(key: &[u8; 24], nonce: &[u8; 12], plain: &[u8]) -> Result<Vec<u8>> {
 pub fn aes_192_gcm_encrypt(
     key: &[u8; SIZE_U24],
@@ -51,6 +54,7 @@ pub fn aes_192_gcm_encrypt(
     }
 }
 
+#[deprecated]
 // pub fn aes_192_gcm_decrypt(key: &[u8; 24], nonce: &[u8; 12], cipher: &[u8]) -> Result<Vec<u8>> {
 pub fn aes_192_gcm_decrypt(
     key: &[u8; SIZE_U24],

@@ -13,5 +13,6 @@ fn app() -> clap::Command {
         .about(ABOUT)
 }
 
-
-fn main() {}
+fn main() {
+    app();
+}

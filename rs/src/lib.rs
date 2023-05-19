@@ -3,6 +3,7 @@ pub mod hash;
 pub mod rand;
 pub mod size;
 pub mod utils;
+pub mod chacha;
 
 pub type Result<T> = std::result::Result<T, Error>;
 
@@ -10,7 +11,7 @@ pub type Result<T> = std::result::Result<T, Error>;
 pub enum ErrorKind {
     #[default]
     Unknown,
-    
+
     Todo,
 }
 

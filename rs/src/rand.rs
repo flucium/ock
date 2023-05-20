@@ -3,6 +3,14 @@ use rand_chacha::ChaCha20Rng;
 // pub use rand_chacha::rand_core::OsRng;
 use crate::size::*;
 
+pub struct Rand;
+
+impl Rand {
+    pub fn generate(&self)->[u8;SIZE_U32]{
+        todo!()
+    }
+}
+
 /// ChaCha20Rng
 ///
 /// Generates a 32-byte cryptographic pseudo random number.

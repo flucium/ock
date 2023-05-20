@@ -29,10 +29,10 @@ impl Symmetric {
     }
 }
 
-pub fn sym_encrypt(key: &[u8; SIZE_U32], nonce: &[u8; SIZE_U12], plain: &[u8]) -> Result<Vec<u8>> {
+pub fn encrypt(key: &[u8; SIZE_U32], nonce: &[u8; SIZE_U12], plain: &[u8]) -> Result<Vec<u8>> {
     Symmetric::new(key)?.encrypt(nonce, plain)
 }
 
-pub fn sym_decrypt(key: &[u8; SIZE_U32], nonce: &[u8; SIZE_U12], cipher: &[u8]) -> Result<Vec<u8>> {
+pub fn decrypt(key: &[u8; SIZE_U32], nonce: &[u8; SIZE_U12], cipher: &[u8]) -> Result<Vec<u8>> {
     Symmetric::new(key)?.decrypt(nonce, cipher)
 }

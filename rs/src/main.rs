@@ -1,3 +1,5 @@
+use aead::KeyInit;
+
 const NAME: &str = "openck";
 
 const VERSION: &str = "0.0.1";
@@ -21,5 +23,7 @@ fn main() {
         --output -o
         --file -f
     */
-    app();
+    
+    
+    app();   
 }

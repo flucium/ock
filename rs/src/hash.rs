@@ -5,7 +5,7 @@ use sha2::{Sha256, Sha512, Sha512_256};
 use sha3::{Sha3_256, Sha3_512};
 
 /// BLAKE3 KDF default context
-pub const BLAKE3_DEFAULT_CONTEXT: &str = "";
+pub const BLAKE3_DEFAULT_CONTEXT: &str = "OPENCK BLAKE3 VERSION 0.0.1";
 
 /// BLAKE3
 //pub fn blake3(bytes: &[u8]) -> [u8; BLAKE3_LENGTH] {

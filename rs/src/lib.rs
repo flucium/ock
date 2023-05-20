@@ -1,9 +1,9 @@
-pub mod aes;
 pub mod hash;
+pub mod keys;
 pub mod rand;
 pub mod size;
+pub mod symmetric;
 pub mod utils;
-pub mod chacha;
 
 pub type Result<T> = std::result::Result<T, Error>;
 

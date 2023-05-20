@@ -6,6 +6,7 @@ pub mod symmetric;
 pub mod utils;
 pub(crate) use error::*;
 pub(crate) use result::Result;
+
 pub mod result {
     use crate::error::Error;
     pub type Result<T> = std::result::Result<T, Error>;

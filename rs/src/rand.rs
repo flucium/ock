@@ -5,12 +5,6 @@ use crate::size::*;
 
 pub struct Rand;
 
-impl Rand {
-    pub fn generate(&self)->[u8;SIZE_U32]{
-        todo!()
-    }
-}
-
 /// ChaCha20Rng
 ///
 /// Generates a 32-byte cryptographic pseudo random number.
@@ -22,7 +16,7 @@ pub fn generate() -> [u8; SIZE_U32] {
 /// ChaCha20Rng
 ///
 /// Generates a 32-byte cryptographic pseudo random number.
-pub fn gen_32() -> [u8; SIZE_U32] {
+pub(crate) fn gen_32() -> [u8; SIZE_U32] {
     let mut rng = ChaCha20Rng::from_entropy();
 
     let bytes = rng.gen::<[u8; 32]>();
@@ -33,7 +27,7 @@ pub fn gen_32() -> [u8; SIZE_U32] {
 /// ChaCha20Rng
 ///
 /// Generates a 24-byte cryptographic pseudo random number.
-pub fn gen_24() -> [u8; SIZE_U24] {
+pub(crate) fn gen_24() -> [u8; SIZE_U24] {
     let mut rng = ChaCha20Rng::from_entropy();
 
     let bytes = rng.gen::<[u8; 24]>();
@@ -44,7 +38,7 @@ pub fn gen_24() -> [u8; SIZE_U24] {
 /// ChaCha20Rng
 ///
 /// Generates a 16-byte cryptographic pseudo random number.
-pub fn gen_16() -> [u8; SIZE_U16] {
+pub(crate) fn gen_16() -> [u8; SIZE_U16] {
     let mut rng = ChaCha20Rng::from_entropy();
 
     let bytes = rng.gen::<[u8; 16]>();
@@ -55,7 +49,7 @@ pub fn gen_16() -> [u8; SIZE_U16] {
 /// ChaCha20Rng
 ///
 /// Generates a 12-byte cryptographic pseudo random number.
-pub fn gen_12() -> [u8; SIZE_U12] {
+pub(crate) fn gen_12() -> [u8; SIZE_U12] {
     let mut rng = ChaCha20Rng::from_entropy();
 
     let bytes = rng.gen::<[u8; 12]>();

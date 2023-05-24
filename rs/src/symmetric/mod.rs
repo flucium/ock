@@ -66,3 +66,24 @@ pub fn sym_cb3_encrypt(
         },
     }
 }
+
+pub fn sym_cb3_decrypt(
+    key: &[u8; SIZE_U32],
+    nonce: &[u8; SIZE_U12],
+    aad: &[u8],
+    cipher: &[u8],
+) -> Result<Vec<u8>> {
+    match ChaCha20Blake3::new_from_slice(key) {
+        Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
+        Ok(ok) => match ok.decrypt(
+            nonce.into(),
+            Payload {
+                msg: cipher,
+                aad: aad,
+            },
+        ) {
+            Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
+            Ok(plain) => Ok(plain),
+        },
+    }
+}

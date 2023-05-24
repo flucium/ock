@@ -1,5 +1,5 @@
-// mod aes;
-// mod chacha;
+mod chacha;
+use self::chacha::{ChaCha20Blake3, XChaCha20Blake3};
 use crate::{size::*, Error, ErrorKind, Result};
 use aead::{Aead, KeyInit, Payload};
 use chacha20poly1305::ChaCha20Poly1305;

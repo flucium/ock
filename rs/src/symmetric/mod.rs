@@ -33,7 +33,7 @@ pub fn sym_decrypt(
 ) -> Result<Vec<u8>> {
     match ChaCha20Poly1305::new_from_slice(key) {
         Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
-        Ok(ok) => match ok.encrypt(
+        Ok(ok) => match ok.decrypt(
             nonce.into(),
             Payload {
                 msg: cipher,
@@ -42,6 +42,27 @@ pub fn sym_decrypt(
         ) {
             Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
             Ok(plain) => Ok(plain),
+        },
+    }
+}
+
+pub fn sym_cb3_encrypt(
+    key: &[u8; SIZE_U32],
+    nonce: &[u8; SIZE_U12],
+    aad: &[u8],
+    plain: &[u8],
+) -> Result<Vec<u8>> {
+    match ChaCha20Blake3::new_from_slice(key) {
+        Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
+        Ok(ok) => match ok.encrypt(
+            nonce.into(),
+            Payload {
+                msg: plain,
+                aad: aad,
+            },
+        ) {
+            Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
+            Ok(cipher) => Ok(cipher),
         },
     }
 }

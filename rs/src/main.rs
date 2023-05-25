@@ -1,6 +1,4 @@
-use aead::KeyInit;
-
-const NAME: &str = "openck";
+const NAME: &str = "OCK";
 
 const VERSION: &str = "0.0.1";
 
@@ -16,14 +14,5 @@ fn app() -> clap::Command {
 }
 
 fn main() {
-    /*
-        --encrypt -e
-        --decrypt -d
-        --input -i
-        --output -o
-        --file -f
-    */
-    
-    
-    app();   
+ 
 }

@@ -4,6 +4,8 @@ pub mod keys;
 pub mod rand;
 pub mod size;
 pub mod symmetric;
+pub mod signature;
+pub mod keyexchange;
 mod utils;
 pub(crate) use error::*;
 pub(crate) use result::Result;

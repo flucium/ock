@@ -72,6 +72,7 @@ where
 
         hasher.update_padded(associated_data);
 
+        // cipher apply_keystream
         cipher.apply_keystream(buffer);
 
         hasher.update_padded(buffer);
@@ -88,6 +89,7 @@ where
         buffer: &mut [u8],
         tag: &aead::Tag<Self>,
     ) -> aead::Result<()> {
+        
         let (mut cipher, mut hasher) = new_cipher(C::new(&self.key, nonce));
 
         hasher.update_padded(associated_data);
@@ -98,7 +100,9 @@ where
         if hasher.verify(tag).is_err() {
             Err(aead::Error)?
         }
-
+        
+        // cipher apply_keystream
+        cipher.apply_keystream(buffer);
         Ok(())
     }
 }

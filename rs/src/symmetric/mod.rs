@@ -1,8 +1,7 @@
-// mod chachablake3;
+mod chacha;
 use crate::{size::*, Error, ErrorKind, Result};
 use aead::{Aead, KeyInit, Payload};
-// use chacha20poly1305::XChaCha20Poly1305;
-use aes_gcm::Aes256Gcm;
+use chacha::ChaCha20Poly1305;
 
 pub fn sym_encrypt(
     key: &[u8; SIZE_U32],
@@ -10,7 +9,7 @@ pub fn sym_encrypt(
     aad: &[u8],
     plain: &[u8],
 ) -> Result<Vec<u8>> {
-    match Aes256Gcm::new_from_slice(key) {
+    match ChaCha20Poly1305::new_from_slice(key) {
         Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
         Ok(ok) => match ok.encrypt(
             nonce.into(),
@@ -31,7 +30,7 @@ pub fn sym_decrypt(
     aad: &[u8],
     cipher: &[u8],
 ) -> Result<Vec<u8>> {
-    match Aes256Gcm::new_from_slice(key) {
+    match ChaCha20Poly1305::new_from_slice(key) {
         Err(err) => Err(Error::new(ErrorKind::Unknown, err.to_string())),
         Ok(ok) => match ok.decrypt(
             nonce.into(),

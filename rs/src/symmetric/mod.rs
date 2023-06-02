@@ -44,30 +44,35 @@ impl Symmetric<'_> {
             Self::Aes128Gcm { key, aad, data } => aead_encrypt(
                 Aes128Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::Aes192Gcm { key, aad, data } => aead_encrypt(
                 Aes192Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::Aes256Gcm { key, aad, data } => aead_encrypt(
                 Aes256Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::ChaCha20Poly1305 { key, aad, data } => aead_encrypt(
                 ChaCha20Poly1305::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::XChaCha20Poly1305 { key, aad, data } => aead_encrypt(
                 XChaCha20Poly1305::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U24,
                 aad,
                 data,
             ),
@@ -117,10 +122,10 @@ impl Symmetric<'_> {
 
 // fn aead_encrypt(aead: impl Aead, nonce: &[u8], aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
 // fn aead_encrypt(aead: impl Aead, nonce_size: u16, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
-fn aead_encrypt(aead: impl Aead, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
+fn aead_encrypt(aead: impl Aead, nonce_size: usize, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
     let r = generate();
-    let nonce = r.get(0..SIZE_U12).unwrap();
-
+    let nonce = r.get(0..nonce_size).unwrap();
+    
     let mut cipher = aead
         .encrypt(
             nonce.into(),

@@ -1,6 +1,5 @@
 use rand::{Rng, SeedableRng};
 use rand_chacha::ChaCha20Rng;
-// pub use rand_chacha::rand_core::OsRng;
 use crate::size::*;
 
 #[derive(Clone, Copy, Debug, Default)]
@@ -81,7 +80,7 @@ pub(crate) fn gen_32() -> [u8; SIZE_U32] {
 // Generates a 12-byte cryptographic pseudo random number.
 // pub(crate) fn gen_12() -> [u8; SIZE_U12] {
 //     let mut rng = ChaCha20Rng::from_entropy();
-    
+
 //     let bytes = rng.gen::<[u8; 12]>();
 
 //     bytes

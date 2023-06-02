@@ -1,16 +1,12 @@
 use crate::{size::*, Error, ErrorKind, Result};
 use ed25519_dalek::{ExpandedSecretKey, PublicKey, Signature, Verifier};
+use rand_core::{CryptoRng, RngCore};
 
-// pub mod ed25519{
-//     pub fn generate_keypair(){}
-    
-//     pub fn sign(){}
-    
-//     pub fn verify(){}
-// }
-
-pub fn generate_keypair() -> ([u8; 32], [u8; 32]) {
-    let keypair: ed25519_dalek::Keypair = ed25519_dalek::Keypair::generate(&mut crate::rand::Rand);
+pub fn generate_keypair<R>(csprng: &mut R) -> ([u8; 32], [u8; 32])
+where
+    R: RngCore + CryptoRng,
+{
+    let keypair: ed25519_dalek::Keypair = ed25519_dalek::Keypair::generate(csprng);
 
     (*keypair.secret.as_bytes(), *keypair.public.as_bytes())
 }

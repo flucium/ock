@@ -1,21 +1,26 @@
 // Reimplemented ChaChaPoly1305 to use the Zeroize ^1 version.
+// https://github.com/RustCrypto/AEADs/tree/master/chacha20poly1305
 
 use aead::{
     consts::{U0, U12, U16, U32},
     generic_array::{ArrayLength, GenericArray},
     AeadCore, AeadInPlace, KeyInit, KeySizeUser,
 };
+
 use chacha20::{
     cipher::{KeyIvInit, StreamCipher, StreamCipherSeek},
     ChaCha20,
 };
+
 use core::marker::PhantomData;
-use poly1305::universal_hash::UniversalHash;
-use poly1305::{Key as Poly1305Key, Poly1305};
+
+use poly1305::{universal_hash::UniversalHash, Key as Poly1305Key, Poly1305};
+
 use zeroize::Zeroize;
 
 pub(crate) type ChaCha20Poly1305 = ChaChaPoly1305<ChaCha20, U12>;
 
+// pub(crate) type XChaCha20Poly1305 = ChaChaPoly1305<XChaCha20, U24>;
 
 pub(crate) struct ChaChaPoly1305<C, N: ArrayLength<u8> = U12> {
     key: GenericArray<u8, U32>,
@@ -89,7 +94,6 @@ where
         buffer: &mut [u8],
         tag: &aead::Tag<Self>,
     ) -> aead::Result<()> {
-        
         let (mut cipher, mut hasher) = new_cipher(C::new(&self.key, nonce));
 
         hasher.update_padded(associated_data);
@@ -100,9 +104,10 @@ where
         if hasher.verify(tag).is_err() {
             Err(aead::Error)?
         }
-        
+
         // cipher apply_keystream
         cipher.apply_keystream(buffer);
+
         Ok(())
     }
 }

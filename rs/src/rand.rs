@@ -35,13 +35,13 @@ impl rand_core::RngCore for Rand {
     }
 }
 
-// ChaCha20Rng
+/// ChaCha20Rng
 //
-// Generates a 32-byte cryptographic pseudo random number.
-// Same as pub fn gen_32() -> [u8;SIZE_U32]{}
-// pub fn generate() -> [u8; SIZE_U32] {
-//     gen_32()
-// }
+/// Generates a 32-byte cryptographic pseudo random number.
+/// Same as pub fn gen_32() -> [u8;SIZE_U32]{}
+pub fn generate() -> [u8; SIZE_U32] {
+    gen_32()
+}
 
 /// ChaCha20Rng
 ///

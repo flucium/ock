@@ -1,4 +1,4 @@
-mod deflate;
+pub mod deflate;
 pub mod hash;
 pub mod keys;
 pub mod rand;

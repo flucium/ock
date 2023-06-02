@@ -3,7 +3,7 @@ mod chacha;
 use crate::{rand::generate, size::*, Error, ErrorKind, Result};
 use aead::{Aead, KeyInit, Payload};
 use aes_gcm::{Aes128Gcm, Aes256Gcm};
-use chacha::ChaCha20Poly1305;
+use chacha::{ChaCha20Poly1305, XChaCha20Poly1305};
 
 type Aes192Gcm = aes_gcm::AesGcm<aes_gcm::aes::Aes192, aead::consts::U12>;
 
@@ -27,6 +27,11 @@ pub enum Symmetric<'a> {
     },
 
     ChaCha20Poly1305 {
+        key: Box<[u8; SIZE_U32]>,
+        aad: &'a [u8],
+        data: &'a [u8],
+    },
+    XChaCha20Poly1305 {
         key: Box<[u8; SIZE_U32]>,
         aad: &'a [u8],
         data: &'a [u8],
@@ -60,6 +65,12 @@ impl Symmetric<'_> {
                 aad,
                 data,
             ),
+            Self::XChaCha20Poly1305 { key, aad, data } => aead_encrypt(
+                XChaCha20Poly1305::new_from_slice(&*key)
+                    .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                aad,
+                data,
+            ),
         }
     }
 
@@ -68,24 +79,35 @@ impl Symmetric<'_> {
             Self::Aes128Gcm { key, aad, data } => aead_decrypt(
                 Aes128Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::Aes192Gcm { key, aad, data } => aead_decrypt(
                 Aes192Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::Aes256Gcm { key, aad, data } => aead_decrypt(
                 Aes256Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
                 aad,
                 data,
             ),
             Self::ChaCha20Poly1305 { key, aad, data } => aead_decrypt(
                 ChaCha20Poly1305::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U12,
+                aad,
+                data,
+            ),
+            Self::XChaCha20Poly1305 { key, aad, data } => aead_decrypt(
+                XChaCha20Poly1305::new_from_slice(&*key)
+                    .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
+                SIZE_U24,
                 aad,
                 data,
             ),
@@ -114,8 +136,8 @@ fn aead_encrypt(aead: impl Aead, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
     Ok(cipher)
 }
 
-fn aead_decrypt(aead: impl Aead, aad: &[u8], cipher: &[u8]) -> Result<Vec<u8>> {
-    let len = cipher.len() - SIZE_U12;
+fn aead_decrypt(aead: impl Aead, nonce_size: usize, aad: &[u8], cipher: &[u8]) -> Result<Vec<u8>> {
+    let len = cipher.len() - nonce_size;
 
     let nonce = match cipher.get(len..) {
         None => return Err(Error::new(ErrorKind::Unknown, "".to_string())),

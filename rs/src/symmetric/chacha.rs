@@ -2,14 +2,14 @@
 // https://github.com/RustCrypto/AEADs/tree/master/chacha20poly1305
 
 use aead::{
-    consts::{U0, U12, U16, U32},
+    consts::{U0, U12, U16, U24, U32},
     generic_array::{ArrayLength, GenericArray},
     AeadCore, AeadInPlace, KeyInit, KeySizeUser,
 };
 
 use chacha20::{
     cipher::{KeyIvInit, StreamCipher, StreamCipherSeek},
-    ChaCha20,
+    ChaCha20, XChaCha20,
 };
 
 use core::marker::PhantomData;
@@ -20,7 +20,7 @@ use zeroize::Zeroize;
 
 pub(crate) type ChaCha20Poly1305 = ChaChaPoly1305<ChaCha20, U12>;
 
-// pub(crate) type XChaCha20Poly1305 = ChaChaPoly1305<XChaCha20, U24>;
+pub(crate) type XChaCha20Poly1305 = ChaChaPoly1305<XChaCha20, U24>;
 
 pub(crate) struct ChaChaPoly1305<C, N: ArrayLength<u8> = U12> {
     key: GenericArray<u8, U32>,

@@ -1,6 +1,6 @@
 mod chacha;
 
-use crate::{hash::blake3, rand::generate, size::*, Error, ErrorKind, Result};
+use crate::{rand::generate, size::*, Error, ErrorKind, Result};
 use aead::{Aead, KeyInit, Payload};
 use aes_gcm::{Aes128Gcm, Aes256Gcm};
 use chacha::ChaCha20Poly1305;
@@ -39,28 +39,24 @@ impl Symmetric<'_> {
             Self::Aes128Gcm { key, aad, data } => aead_encrypt(
                 Aes128Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                &gen_nonce_12(),
                 aad,
                 data,
             ),
             Self::Aes192Gcm { key, aad, data } => aead_encrypt(
                 Aes192Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                &gen_nonce_12(),
                 aad,
                 data,
             ),
             Self::Aes256Gcm { key, aad, data } => aead_encrypt(
                 Aes256Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                &gen_nonce_12(),
                 aad,
                 data,
             ),
             Self::ChaCha20Poly1305 { key, aad, data } => aead_encrypt(
                 ChaCha20Poly1305::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                &gen_nonce_12(),
                 aad,
                 data,
             ),
@@ -72,28 +68,24 @@ impl Symmetric<'_> {
             Self::Aes128Gcm { key, aad, data } => aead_decrypt(
                 Aes128Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                SIZE_U12,
                 aad,
                 data,
             ),
             Self::Aes192Gcm { key, aad, data } => aead_decrypt(
                 Aes192Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                SIZE_U12,
                 aad,
                 data,
             ),
             Self::Aes256Gcm { key, aad, data } => aead_decrypt(
                 Aes256Gcm::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                SIZE_U12,
                 aad,
                 data,
             ),
             Self::ChaCha20Poly1305 { key, aad, data } => aead_decrypt(
                 ChaCha20Poly1305::new_from_slice(&*key)
                     .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?,
-                SIZE_U12,
                 aad,
                 data,
             ),
@@ -101,7 +93,12 @@ impl Symmetric<'_> {
     }
 }
 
-fn aead_encrypt(aead: impl Aead, nonce: &[u8], aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
+// fn aead_encrypt(aead: impl Aead, nonce: &[u8], aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
+// fn aead_encrypt(aead: impl Aead, nonce_size: u16, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
+fn aead_encrypt(aead: impl Aead, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
+    let r = generate();
+    let nonce = r.get(0..SIZE_U12).unwrap();
+
     let mut cipher = aead
         .encrypt(
             nonce.into(),
@@ -111,21 +108,23 @@ fn aead_encrypt(aead: impl Aead, nonce: &[u8], aad: &[u8], plain: &[u8]) -> Resu
             },
         )
         .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?;
+
     cipher.append(&mut nonce.to_vec());
+
     Ok(cipher)
 }
 
-fn aead_decrypt(aead: impl Aead, nonce_size: usize, aad: &[u8], cipher: &[u8]) -> Result<Vec<u8>> {
-    let len = cipher.len() - nonce_size;
+fn aead_decrypt(aead: impl Aead, aad: &[u8], cipher: &[u8]) -> Result<Vec<u8>> {
+    let len = cipher.len() - SIZE_U12;
 
     let nonce = match cipher.get(len..) {
-        None => Err(Error::new(ErrorKind::Unknown, "".to_owned()))?,
-        Some(n) => n,
+        None => return Err(Error::new(ErrorKind::Unknown, "".to_string())),
+        Some(nonce) => nonce,
     };
 
     let cipher = match cipher.get(..len) {
-        None => Err(Error::new(ErrorKind::Unknown, "".to_owned()))?,
-        Some(c) => c,
+        None => return Err(Error::new(ErrorKind::Unknown, "".to_string())),
+        Some(cipher) => cipher,
     };
 
     let plain = aead
@@ -139,14 +138,4 @@ fn aead_decrypt(aead: impl Aead, nonce_size: usize, aad: &[u8], cipher: &[u8]) -
         .map_err(|err| Error::new(ErrorKind::Unknown, err.to_string()))?;
 
     Ok(plain)
-}
-
-fn gen_nonce_12() -> [u8; SIZE_U12] {
-    let r = generate();
-
-    let h = blake3(&r);
-
-    let nonce: [u8; SIZE_U12] = h.get(0..SIZE_U12).unwrap().try_into().unwrap();
-
-    nonce
 }

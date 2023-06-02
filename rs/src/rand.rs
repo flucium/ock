@@ -2,6 +2,7 @@ use rand::{Rng, SeedableRng};
 use rand_chacha::ChaCha20Rng;
 use crate::size::*;
 
+/// A cryptography rand generator. ChaCha20Rng.
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Rand;
 

@@ -1,6 +1,5 @@
 pub mod deflate;
 pub mod hash;
-pub mod keys;
 pub mod rand;
 pub mod size;
 pub mod symmetric;

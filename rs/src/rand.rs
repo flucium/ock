@@ -1,6 +1,6 @@
+use crate::size::*;
 use rand::{Rng, SeedableRng};
 use rand_chacha::ChaCha20Rng;
-use crate::size::*;
 
 /// A cryptography rand generator. ChaCha20Rng.
 #[derive(Clone, Copy, Debug, Default)]
@@ -53,36 +53,3 @@ pub(crate) fn gen_32() -> [u8; SIZE_U32] {
 
     bytes
 }
-
-// ChaCha20Rng
-//
-// Generates a 24-byte cryptographic pseudo random number.
-// pub(crate) fn gen_24() -> [u8; SIZE_U24] {
-//     let mut rng = ChaCha20Rng::from_entropy();
-
-//     let bytes = rng.gen::<[u8; 24]>();
-
-//     bytes
-// }
-
-// ChaCha20Rng
-//
-// Generates a 16-byte cryptographic pseudo random number.
-// pub(crate) fn gen_16() -> [u8; SIZE_U16] {
-//     let mut rng = ChaCha20Rng::from_entropy();
-
-//     let bytes = rng.gen::<[u8; 16]>();
-
-//     bytes
-// }
-
-// ChaCha20Rng
-//
-// Generates a 12-byte cryptographic pseudo random number.
-// pub(crate) fn gen_12() -> [u8; SIZE_U12] {
-//     let mut rng = ChaCha20Rng::from_entropy();
-
-//     let bytes = rng.gen::<[u8; 12]>();
-
-//     bytes
-// }

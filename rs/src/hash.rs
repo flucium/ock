@@ -1,7 +1,4 @@
 use crate::size::*;
-// use digest::Digest;
-// use sha2::{Sha256, Sha512, Sha512_256};
-// use sha3::{Sha3_256, Sha3_512};
 
 /// BLAKE3 KDF default context
 pub const BLAKE3_DEFAULT_CONTEXT: &str = "OPENCK BLAKE3 VERSION 0.0.1";
@@ -31,46 +28,3 @@ pub fn blake3_kdf(ikm: &[u8], context: &str) -> [u8; SIZE_U32] {
 pub fn blake3_mac(key: &[u8; 32], msg: &[u8]) -> [u8; SIZE_U32] {
     blake3::keyed_hash(key, msg).into()
 }
-
-// SHA1
-
-// SHA1
-// pub fn sha1(bytes: &[u8]) -> [u8; SHA1_LENGTH] {
-// #[deprecated]
-// pub fn sha1(bytes: &[u8]) -> [u8; SIZE_U20] {
-//     Sha1::digest(bytes).into()
-// }
-
-// SHA2 Families
-
-// SHA2 256
-// pub fn sha256(bytes: &[u8]) -> [u8; SHA256_LENGTH] {
-// pub fn sha256(bytes: &[u8]) -> [u8; SIZE_U32] {
-//     Sha256::digest(bytes).into()
-// }
-
-// SHA2 512
-// pub fn sha512(bytes: &[u8]) -> [u8; SHA512_LENGTH] {
-// pub fn sha512(bytes: &[u8]) -> [u8; SIZE_U64] {
-//     Sha512::digest(bytes).into()
-// }
-
-// SHA2 512/256
-// pub fn sha512_256(bytes: &[u8]) -> [u8; SHA512_256_LENGTH] {
-// pub fn sha512_256(bytes: &[u8]) -> [u8; SIZE_U32] {
-//     Sha512_256::digest(bytes).into()
-// }
-
-// SHA3 Families
-
-// SHA3 256
-// pub fn sha3_256(bytes: &[u8]) -> [u8; SHA3_256_LENGTH] {
-// pub fn sha3_256(bytes: &[u8]) -> [u8; SIZE_U32] {
-//     Sha3_256::digest(bytes).into()
-// }
-
-// SHA3 512
-// pub fn sha3_512(bytes: &[u8]) -> [u8; SHA3_512_LENGTH] {
-// pub fn sha3_512(bytes: &[u8]) -> [u8; SIZE_U64] {
-//     Sha3_512::digest(bytes).into()
-// }

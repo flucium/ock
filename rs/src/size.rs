@@ -13,5 +13,8 @@ pub const SIZE_U24: usize = 24;
 /// 32-byte
 pub const SIZE_U32: usize = 32;
 
+// 34-byte
+// pub const SIZE_U34: usize = 34;
+
 /// 64-byte
 pub const SIZE_U64: usize = 64;

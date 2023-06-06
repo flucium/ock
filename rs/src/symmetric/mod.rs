@@ -125,7 +125,7 @@ impl Symmetric<'_> {
 fn aead_encrypt(aead: impl Aead, nonce_size: usize, aad: &[u8], plain: &[u8]) -> Result<Vec<u8>> {
     let r = generate();
     let nonce = r.get(0..nonce_size).unwrap();
-    
+
     let mut cipher = aead
         .encrypt(
             nonce.into(),

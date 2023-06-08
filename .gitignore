@@ -11,4 +11,9 @@
 /rs/**/.DS_Store
 
 # fs
+/fs/bin/
+/fs/obj/
 
+# cs
+/cs/bin/
+/cs/obj/

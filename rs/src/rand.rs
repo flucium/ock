@@ -39,17 +39,17 @@ impl rand_core::RngCore for Rand {
 //
 /// Generates a 32-byte cryptographic pseudo random number.
 /// Same as pub fn gen_32() -> [u8;SIZE_U32]{}
-pub fn generate() -> [u8; SIZE_U32] {
+pub fn generate() -> [u8; SIZE_32] {
     gen_32()
 }
 
 /// ChaCha20Rng
 ///
 /// Generates a 32-byte cryptographic pseudo random number.
-pub(crate) fn gen_32() -> [u8; SIZE_U32] {
+pub(crate) fn gen_32() -> [u8; SIZE_32] {
     let mut rng = ChaCha20Rng::from_entropy();
 
-    let bytes = rng.gen::<[u8; 32]>();
+    let bytes = rng.gen::<[u8; SIZE_32]>();
 
     bytes
 }

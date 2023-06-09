@@ -1,4 +1,6 @@
 use crate::size::*;
+use digest::Digest;
+use sha2::{Sha256, Sha512, Sha512_256};
 
 /// BLAKE3 KDF default context
 pub const BLAKE3_DEFAULT_CONTEXT: &str = "OPENCK BLAKE3 VERSION 0.0.1";
@@ -28,3 +30,20 @@ pub fn blake3_kdf(ikm: &[u8], context: &str) -> [u8; SIZE_U32] {
 pub fn blake3_mac(key: &[u8; 32], msg: &[u8]) -> [u8; SIZE_U32] {
     blake3::keyed_hash(key, msg).into()
 }
+
+/// SHA256
+pub fn sha256(bytes: &[u8]) -> [u8; SIZE_U32] {
+    Sha256::digest(bytes).into()
+}
+
+/// SHA512
+pub fn sha512(bytes: &[u8]) -> [u8; SIZE_U64] {
+    Sha512::digest(bytes).into()
+}
+
+/// SHA512/256
+pub fn sha512_256(bytes: &[u8]) -> [u8; SIZE_U32] {
+    Sha512_256::digest(bytes).into()
+}
+
+pub fn hkdf_sha256() {}

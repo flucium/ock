@@ -8,30 +8,30 @@ use chacha::{ChaCha20Poly1305, XChaCha20Poly1305};
 type Aes192Gcm = aes_gcm::AesGcm<aes_gcm::aes::Aes192, aead::consts::U12>;
 pub enum Symmetric<'a> {
     Aes128Gcm {
-        key: Box<[u8; SIZE_16]>,
+        key: Box<[u8; SIZE_U16]>,
         aad: &'a [u8],
         data: &'a [u8],
     },
 
     Aes192Gcm {
-        key: Box<[u8; SIZE_24]>,
+        key: Box<[u8; SIZE_U24]>,
         aad: &'a [u8],
         data: &'a [u8],
     },
 
     Aes256Gcm {
-        key: Box<[u8; SIZE_32]>,
+        key: Box<[u8; SIZE_U32]>,
         aad: &'a [u8],
         data: &'a [u8],
     },
 
     ChaCha20Poly1305 {
-        key: Box<[u8; SIZE_32]>,
+        key: Box<[u8; SIZE_U32]>,
         aad: &'a [u8],
         data: &'a [u8],
     },
     XChaCha20Poly1305 {
-        key: Box<[u8; SIZE_32]>,
+        key: Box<[u8; SIZE_U32]>,
         aad: &'a [u8],
         data: &'a [u8],
     },
@@ -73,27 +73,27 @@ impl Symmetric<'_> {
                 key: _,
                 aad: _,
                 data: _,
-            } => SIZE_12,
+            } => SIZE_U12,
             Self::Aes192Gcm {
                 key: _,
                 aad: _,
                 data: _,
-            } => SIZE_12,
+            } => SIZE_U12,
             Self::Aes256Gcm {
                 key: _,
                 aad: _,
                 data: _,
-            } => SIZE_12,
+            } => SIZE_U12,
             Self::ChaCha20Poly1305 {
                 key: _,
                 aad: _,
                 data: _,
-            } => SIZE_12,
+            } => SIZE_U12,
             Self::XChaCha20Poly1305 {
                 key: _,
                 aad: _,
                 data: _,
-            } => SIZE_24,
+            } => SIZE_U24,
         }
     }
 }

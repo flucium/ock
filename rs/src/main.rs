@@ -120,6 +120,8 @@ fn app_symmetric_args() -> [clap::Arg; 4] {
 }
 
 fn main() -> std::io::Result<()> {
+
+
     let app = app();
 
     let matches = app.get_matches();

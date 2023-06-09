@@ -54,7 +54,7 @@ chacha20 = "0.9.1"
 aes-gcm = "0.10.1"
 
 #/hashes
-#sha2 = "0.10.6"
+sha2 = "0.10.6"
 #sha3 = "0.10.8"
 
 #/block-ciphers

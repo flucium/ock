@@ -12,6 +12,19 @@ const AUTHOR: &str = "flucium <flucium@flucium.net>";
 
 const ABOUT: &str = "";
 
+// const SYMMETRIES: [&str; 4] = [
+//     "aes-128-gcm",
+//     "aes-192-gcm",
+//     "aes-256-gcm",
+//     "chacha20-poly1305",
+// ];
+
+// const HASHES:[]
+
+// const PASSWORD_HASHES:[]
+
+// const KDFS:[]
+
 fn app() -> clap::Command {
     clap::Command::new(NAME)
         .version(VERSION)
@@ -248,7 +261,7 @@ fn main() -> std::io::Result<()> {
                 .get_one::<String>("message")
                 .unwrap_or(&String::default())
                 .as_bytes();
-            
+
             exit(1)
         }
         _ => {}

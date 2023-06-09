@@ -49,7 +49,7 @@ pub fn generate() -> [u8; SIZE_U32] {
 pub(crate) fn gen_32() -> [u8; SIZE_U32] {
     let mut rng = ChaCha20Rng::from_entropy();
 
-    let bytes = rng.gen::<[u8; 32]>();
+    let bytes = rng.gen::<[u8; SIZE_U32]>();
 
     bytes
 }

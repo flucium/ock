@@ -1,7 +1,10 @@
+// use crate::hash::blake3;
+// use crate::rand::generate;
+// use crate::size::SIZE_U32;
 // pub(crate) fn hex(bytes: &[u8]) -> String {
+
 //     bytes.iter().map(|byte| format!("{:02X}", byte)).collect()
 // }
-
 
 // pub(crate) fn type_of<T>(_: T) -> String {
 //     core::any::type_name::<T>().to_string()
@@ -27,4 +30,9 @@
 // bytes to u16
 // pub(crate) fn bytes_to_u16(bytes: [u8; 2]) -> u16 {
 //     u16::from_be_bytes(bytes)
+// }
+
+// pub(crate) fn generate_salt() -> [u8; SIZE_U32] {
+//     let r = generate();
+//     blake3(&r)
 // }

@@ -60,5 +60,8 @@ aes-gcm = "0.10.1"
 #/block-ciphers
 #aes = "0.8.2"
 
+#/kdfs
+hkdf = "0.12.3"
+
 #/universal-hashes
 poly1305 = "0.8.0"

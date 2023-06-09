@@ -44,7 +44,7 @@ subtle = { version = "2", default-features = false }
 
 #/traits
 aead = "0.5.2"
-#digest = "0.10.6"
+digest = "0.10.6"
 
 #/stream-ciphers
 chacha20 = "0.9.1"

@@ -46,4 +46,16 @@ pub fn sha512_256(bytes: &[u8]) -> [u8; SIZE_U32] {
     Sha512_256::digest(bytes).into()
 }
 
-pub fn hkdf_sha256() {}
+/// HKDF Extract SHA256
+pub fn hkdf_sha256(salt: &[u8], ikm: &[u8]) -> [u8; SIZE_U32] {
+    hkdf::SimpleHkdf::<Sha256>::extract(Some(salt), ikm)
+        .0
+        .into()
+}
+
+/// HKDF Extract SHA512/256
+pub fn hkdf_sha512_256(salt: &[u8], ikm: &[u8]) -> [u8; SIZE_U32] {
+    hkdf::SimpleHkdf::<Sha512_256>::extract(Some(salt), ikm)
+        .0
+        .into()
+}
